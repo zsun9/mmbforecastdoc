@@ -1,0 +1,17 @@
+site_name: MMB Forecasting Project Documentation
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - System requirements: system.md
+  - Project layout: layout.md
+  - Process data: data.md
+  - Generate forecast: forecast.md
+  - Add model: model.md
+  - Present results: application.md
+
+markdown_extensions:
+  - def_list
+  - admonition
