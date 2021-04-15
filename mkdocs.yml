@@ -5,7 +5,7 @@ theme:
 
 nav:
   - Home: index.md
-  - System requirements: system.md
+  - Software environments: system.md
   - Project layout: layout.md
   - Process data: data.md
   - Generate forecast: forecast.md
