@@ -28,12 +28,15 @@ The remainder of the page introduces the theoretical background of the project.
 :   Macroeconomic models developed after the 2008-09 financial crisis. These models contain real frictions as a result of financing problems faced by firms and households, such as the financial accelerator à la Bernanke, Gertler and Gilchrist (1999), or the collateral constraint à la Kiyotaki and Moore (1997).
 
 !!! note
-    The above two groups are actually determined by whether a financial friction is included in the model, rather than by whether the model is published before or after the financial crisis. For example, the Gali, Smets, and Wouters (2012) model is categorized as a pre-crisis model, while the three-equation NK model with a financial accelerator is categorized as a post-crisis model.
+    The above categorization is actually determined by whether a financial friction is included in the model, rather than by whether the model is published before or after the financial crisis. For example, the Gali, Smets, and Wouters (2012) model is categorized as a pre-crisis model, while the three-equation NK model with a financial accelerator is categorized as a post-crisis model.
 
 `Data vintage`
-:   A sample of data collected historically. The word **vintage** is used to highlight the fact that, as many macroeconomic series are revised over time, a specific data point (for example, the real GDP growth in 2008:III) can have different values when it is observed in different time. We employ real-time data vintages for model estimation, meaning that we use data that were observed 
+:   A sample of data collected historically. The word **vintage** is used to highlight the fact that, as many macroeconomic series are revised over time, a specific data point (for example, the real GDP growth in 2008:III) can have different values when it is observed in different points in time. Real-time data vintages are used for model estimation, meaning that the data we use are the same as the data that forecasters face in real time.
 
-- scenarios
+`Data Scenarios`
+:   Refers .. only difference is how the current-quarter data is inclunded.
+
+
 
 - raw data
 - observed data
