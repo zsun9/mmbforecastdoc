@@ -11,7 +11,7 @@ The script contains the following sections
 
 - settings
 - DSGE estimation
-- Result organization
+- Result adjustment and organization
 
 
 ### Settings
@@ -29,6 +29,7 @@ All changes of parameters should be made in the section `settings`. The importan
 - `p.targetdynare`: A string vector containing the Dynare version intended to use. This parameter is only for checking purpose, and the script will produce a warning if the dynare version used is difference from the string of this parameter.
 - `p.executor`: A string value that will appear in the jison file in the result. Contains the name of the excecutor of the script
 - `p.suffix`: Suffix of the folder name, if needed
+- `p.mode_compute_order`: A interger vector containing the sequence of `mode_compute` for Dynare to try. The next routine will be tried once the previous one runs into error.
 
 
 ### DSGE estimation
@@ -37,8 +38,8 @@ The algorithm of the estimation is described as follow. Looping through `p.model
 
 For easy illustration, take the model `QPM08`, vintage date `20210101`, and senario `s1` as example. A folder `QPM08_20210101_s1_fffff` will be created under the path `...\MMB_forecast_application\estimations`. It will copy the sheet `s1` of the excel data file `data_20210101` from the path `...\MMB_forecast_application\data\vintage_data`. 
 
-The estimation command is then built next. The estimatino block will be built in the following standardized format
->estimation(nodisplay, smoother, order=1, prefilter=0, mode_check, bayesian_irf, datafile=(data file name), xls_sheet=(`scenario`), xls_range=B1:(`p.ExcelColumnUntil`)101, presample=4, mh_replic=(`p.chainLen`), mh_nblocks=1, mh_drop=0.3, mh_tune_jscale=0.3, sub_draws=1000, forecast=40, mode_compute=6) gdp_rgd_obs gdpdef_obs;
+The estimation command is then built next. The estimation block will be built in the following standardized format
+>estimation(nodisplay, smoother, order=1, prefilter=0, mode_check, bayesian_irf, datafile=(`data file name`), xls_sheet=(`scenario`), xls_range=B1:(`p.ExcelColumnUntil`)101, presample=4, mh_replic=(`p.chainLen`), mh_nblocks=1, mh_drop=0.3, mh_tune_jscale=0.3, sub_draws=1000, forecast=40, mode_compute=6) gdp_rgd_obs gdpdef_obs;
 
 !!!note
     As seen from the code, it is important to match the key observables with the following names:
@@ -53,7 +54,7 @@ The algorithm will then append the above estimation block to the main mod file o
 Note that the MCMC draws will be deleted by the algorithm due to their enormous size. Note that some forecast results has to be adjusted depending on the model of interest (the adjustment is made under the block ` % save GDP forecasts (start from the last in-sample obs)` in the MATLAB script). 
 
 !!!Example
-    For models that uses demeanded inflation as observable, the inflation forecast generated will also be demeaned. As a result, the MATLAB script has to be modified such that mean of the inflation has to be added back to the inflation forecast of the model. One potential way to do so is to compare the first observation of the inflation (actual data) with another model that uses non-demeaned inflation, and add the difference back to the whole forecast series.
+    For models that uses demeanded inflation as observable, the inflation forecast generated will also be demeaned. As a result, the MATLAB script has to be modified such that mean of the inflation has to be added back to the inflation forecast of the model. One potential way to do so is to compare the first observation (actual data) of the inflation with another model that uses non-demeaned inflation, and add the difference back to the whole forecasting series.
 
 
 
