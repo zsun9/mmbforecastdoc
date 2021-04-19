@@ -17,19 +17,22 @@ The script contains the following sections
 ### Settings
 All changes of parameters should be made in the section `settings`. The important parameters that needs to be checked everytime are as follows
 
-- `p.vintages`: A string vector containing the vintage dates of the model to be estimated. Date format in `yyyy-mm-dd`
-- `p.scenarios`: A string vector containing the scenarios to be estimated.
-- `p.models`:  A string vector containing the names of the models to be estimated.
+- `p.vintages`: A string array containing the vintage dates of the model to be estimated. Date format in `yyyy-mm-dd`
+- `p.scenarios`: A string array containing the scenarios to be estimated.
+- `p.models`:  A string array containing the names of the models to be estimated.
 - `p.ExcelColumnUntil`: The column of vintage data in excel file that dynare reads until. It is needed in the estimation block of dynare, as the cell rage of excel file has to be specified.
 - `p.chainLen`: Number of replications for Metropolis-Hastings algorithm, it is set to 1000000 normally, except for extermely computationally costly model (such as CMR14), which is then reduced to 500000.
+- `p.mode_compute_order`: A interger vector containing the sequence of `mode_compute` for Dynare to try. The next routine will be tried once the previous one runs into error. 
+!!!Note
+    if Dynare version 4.6.3 or later is used, an option `mh_tune_jscale` in estimation block can be used. It automatically tunes the scale parameter of the jumping distribution’s covariance matrix (MetropolisHastings), so that the overall acceptance ratio is close to the desired level. However, if this option is only to be used with `mode_compute=6`. If that is the case, then `p.mode_compute_order` should contains a single integer `6`.
 
 
- Other parameters are described as follows
+Other parameters that needed not to be modified often are described as follows
 
-- `p.targetdynare`: A string vector containing the Dynare version intended to use. This parameter is only for checking purpose, and the script will produce a warning if the dynare version used is difference from the string of this parameter.
-- `p.executor`: A string value that will appear in the jison file in the result. Contains the name of the excecutor of the script
-- `p.suffix`: Suffix of the folder name, if needed
-- `p.mode_compute_order`: A interger vector containing the sequence of `mode_compute` for Dynare to try. The next routine will be tried once the previous one runs into error.
+- `p.targetdynare`: A string array containing the Dynare version intended to use. This parameter is only for checking purpose, and the script will produce a warning if the dynare version used is difference from the string of this parameter.
+- `p.executor`: A string that will appear in the jison file in the result. Contains the name of the excecutor of the script
+- `p.suffix`: A string value that contains suffix of the folder name, if needed. A blank string otherwise.
+
 
 
 ### DSGE estimation
@@ -41,7 +44,7 @@ For easy illustration, take the model `QPM08`, vintage date `20210101`, and sena
 The estimation command is then built next. The estimation block will be built in the following standardized format
 >estimation(nodisplay, smoother, order=1, prefilter=0, mode_check, bayesian_irf, datafile=(`data file name`), xls_sheet=(`scenario`), xls_range=B1:(`p.ExcelColumnUntil`)101, presample=4, mh_replic=(`p.chainLen`), mh_nblocks=1, mh_drop=0.3, mh_tune_jscale=0.3, sub_draws=1000, forecast=40, mode_compute=6) gdp_rgd_obs gdpdef_obs;
 
-!!!note
+!!!Important
     As seen from the code, it is important to match the key observables with the following names:
 
     - GDP growth as `gdp_rgd_obs`, and 
