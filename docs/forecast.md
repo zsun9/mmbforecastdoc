@@ -55,7 +55,7 @@ If this folder already exists, then we can choose either to delete existing file
 The vintage data and Dynare mod-file are copied to the newly created folder. Then, the estimation command is added to the bottom of the Dynare mod-file, in which we use the values of the hyperparameters given in the `settings` block.
 
 A typical estimation command looks like the following:
->```estimation(nodisplay, smoother, order=1, prefilter=0, mode_check, bayesian_irf, datafile=data_20210209, xls_sheet=s1, xls_range=B1:AY100, presample=4, mh_replic=1000000, mh_nblocks=1, mh_jscale=0.3, mh_drop=0.3, sub_draws=5000, forecast=40, mode_compute=4) gdp_rgd_obs gdpdef_obs;```
+>estimation(nodisplay, smoother, order=1, prefilter=0, mode_check, bayesian_irf, datafile=data_20210209, xls_sheet=s1, xls_range=B1:AY100, presample=4, mh_replic=1000000, mh_nblocks=1, mh_jscale=0.3, mh_drop=0.3, sub_draws=5000, forecast=40, mode_compute=4) gdp_rgd_obs gdpdef_obs;
 
 !!!Note
     As seen from the code, it is essential to match the key observables with the following names:
