@@ -28,10 +28,14 @@ Eventually the script export a variable `results` of the type dictionary, which 
 The results are then exported to `...\MMB_forecast_application\application\src\results.json`
 
 
-??? what is `lastforecast.txt`?
 
 
 
 ## Open the online application
 
 Open visual studio code and install `Live Server`. From the terminal, change your directory to the path `...\MMB_forecast_application\application`. From the explorer inside the VS code, right click the respective html files and click `Open with Live Server`. 
+
+
+## Changing colors of the plots
+
+Colors of the lines are defined in `...\MMB_forecast_application\application\js\constants.js`. Simply amend the color of the model of interest. 
