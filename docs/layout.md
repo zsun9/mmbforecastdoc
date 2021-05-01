@@ -25,16 +25,16 @@ This page briefly introduces the files stored in different folders of the GitHub
 
 This folder contains files for building up the online application.
 
-- `index.html`: The index page before a user is logged in.
+- `index.html`: The index page.
 - `login.html`: The login page.
 - `index_login.html`: The index page after a user is logged in.
-- `forecast.html`: The page for visualizing the forecasts of the real GDP growth.
+- `forecast.html`: The page for visualizing the forecasts.
 - `rmse.html`: The page for displaying root mean squared errors (RMSEs).
 - `variable.html`: The page for showing time-series plots of the observables.
-- `about.html`: The page for providing basic information of the application
-- `app.js`:
+- `about.html`: The page that provides basic information about the application
+- `app.js`: 
 - `package.json`:
-- `common`: Contains HTML components shared across various webpages.
+- `common`: Contains HTML components shared across webpages.
 - `css`:
 - `fonts`:
 - `js`:

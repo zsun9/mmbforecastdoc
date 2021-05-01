@@ -18,6 +18,9 @@ markdown_extensions:
   - pymdownx.tabbed
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.snippets
 
 extra_javascript:
   - javascripts/config.js

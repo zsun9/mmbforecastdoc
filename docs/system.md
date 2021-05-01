@@ -4,11 +4,9 @@
 
 Programs for estimating models and generating forecasts are written in `Matlab (Dynare)`.
 
-- `Matlab 2019a + Dynare 4.5.7` are for `gen_forecast_old.m`
-- `Matlab 2019a + Dynare 4.6.2` are for `gen_Forecast.m`
-- `Matlab 2011a + Dynare 4.2.4` are for `gen_forecast_2011a.m`
-
-As recommended 
+- `Matlab 2019a + Dynare 4.5.7` for `gen_forecast_old.m`
+- `Matlab 2019a + Dynare 4.6.2` for `gen_Forecast.m`
+- `Matlab 2011a + Dynare 4.2.4` for `gen_forecast_2011a.m`
 
 ## Python and R
 

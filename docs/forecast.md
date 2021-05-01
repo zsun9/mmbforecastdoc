@@ -1,54 +1,65 @@
 # Forecast generation
 
-Forecast generation is done by the script `gen_forecast.m`. Beofre starting the forecast generation, please make sure that
+Model estimation and forecast generation are done through the Matlab m-file `gen_forecast_old.m`. Before executing this program, please make sure that
 
-- observables and the respective raw data is generated according to the section `Process data`
-- Model mod file is added and modified according to section `Add model`
+- The observed data of the model are already generated according to the descriptions in [Data processing](data.md)
 
-## Structure of `gen_forecast.m`
+- The Dynare mod-file of the model is already included in the folder `Models` according to the instructions in [Model implementation](model.md)
 
-The script contains the following sections
+This program contains three blocks
 
-- settings
-- DSGE estimation
-- Result adjustment and organization
+- Settings
+- DSGE model estimation
+- Bayesian VAR model estimation
 
+---
 
-### Settings
-All changes of parameters should be made in the section `settings`. The important parameters that needs to be checked everytime are as follows
+## Settings
+All changes of the hyperparameters should be made within the section `settings`. The important parameters that needs to be checked everytime are as follows
 
-- `p.vintages`: A string array containing the vintage dates of the model to be estimated. Date format in `yyyy-mm-dd`
+- `p.vintages`: A string array containing the vintage dates of the model to be estimated; Date format: `yyyy-mm-dd`.
 - `p.scenarios`: A string array containing the scenarios to be estimated.
 - `p.models`:  A string array containing the names of the models to be estimated.
-- `p.ExcelColumnUntil`: The column of vintage data in excel file that dynare reads until. It is needed in the estimation block of dynare, as the cell rage of excel file has to be specified.
-- `p.chainLen`: Number of replications for Metropolis-Hastings algorithm, it is set to 1000000 normally, except for extermely computationally costly model (such as CMR14), which is then reduced to 500000.
-- `p.mode_compute_order`: A interger vector containing the sequence of `mode_compute` for Dynare to try. The next routine will be tried once the previous one runs into error. 
+
+!!! note
+    The names of the DSGE models should be the same as the names of the sub-folder in `Models`. The names of the BVAR models can only take three values: "GLP3v", "GLP5v", and "GLP8v".
+
+- `p.executor`: The name of the person who runs the program.
+- `p.ExcelColumnUntil`: The last column of the vintage data file. It instructs Dynare which cell range it reads from the Excel spreadsheet.
+- `p.suffix`: The suffix of the names of folders that will be created in `./estimations`. It is usually used for experimental purposes if needed. A blank string is otherwise used.
+- `p.chainLen`: Number of replications for the Metropolis Hastings (MH) algorithm in the estimation of DSGE models. It is set to 1,000,000 for most models, except for those with extremely high computational cost (e.g., CMR14), which is then set to 100,000.
+- `p.scalingParam`: Scale parameter for the covariance matrix of the the proposal distribution in the MH algorithm. Ideally, the value of this parameter is chosen to ensure that the final acceptance rate of the MH algorithm is between 20% and 40%.
+- `p.mode_compute_order`: An array containing a sequence of numbers representing the corresponding `mode_compute` algorithms in Dynare. The program loops through all the mode computation routines, until the mode is found.
+ 
 !!!Note
-    if Dynare version 4.6.3 or later is used, an option `mh_tune_jscale` in estimation block can be used. It automatically tunes the scale parameter of the jumping distribution’s covariance matrix (MetropolisHastings), so that the overall acceptance ratio is close to the desired level. However, if this option is only to be used with `mode_compute=6`. If that is the case, then `p.mode_compute_order` should contains a single integer `6`.
+    In `gen_forecast.m`, `p.mode_compute_order = 6;`. This is because an option `mh_tune_jscale` is included in the mod-file, which instructs Dynare to automatically tune the scale parameter of the covariance matrix, so that the acceptance ratio will be close to the desired level. However, this option is only compatible with `mode_compute=6`.
 
+The usage of other hyperparameters are either self-explanatory or to be easily found in the Dynare manual.
 
-Other parameters that needed not to be modified often are described as follows
+---
 
-- `p.targetdynare`: A string array containing the Dynare version intended to use. This parameter is only for checking purpose, and the script will produce a warning if the dynare version used is difference from the string of this parameter.
-- `p.executor`: A string that will appear in the jison file in the result. Contains the name of the excecutor of the script
-- `p.suffix`: A string value that contains suffix of the folder name, if needed. A blank string otherwise.
+## DSGE model estimation
 
+The structure of this block consists of three nested loops:
 
+- A loop through `p.models`,
+- A loop through `p.vintages`, and
+- A loop through `p.scenarios`.
 
-### DSGE estimation
+In each loop, a sub-folder named `[modelname]_[vintagedate]_[scenario]_(suffix)` will be created to store the estimation and forecasts. For example, if we estimate the `QPM08` model using the vintage data at `20080807` in scenario `1` without any suffix, then a folder `QPM08_20210101_s1` will be created under the path `./estimations`.
 
-The algorithm of the estimation is described as follow. Looping through `p.models`, then looping through `p.vintages`, then looping throught `p.scenarios`. For each of the elements of the above vectors, a folder in the format of `XXXX_yyyymmdd_ss_fffff` is created, where `XXXX` is the name of the model, `yyyymmdd` is the vintage date, `ss` is the scenario, and `fffff` is the string value of `p.suffix`. 
+If this folder already exists, then we can choose either to delete existing files and start a complete new estimation, or keep existing files. For example, if a mode file is already in the folder, then we can skip the maximum likelihood estimation and start the MH replications right away.
 
-For easy illustration, take the model `QPM08`, vintage date `20210101`, and senario `s1` as example. A folder `QPM08_20210101_s1_fffff` will be created under the path `...\MMB_forecast_application\estimations`. It will copy the sheet `s1` of the excel data file `data_20210101` from the path `...\MMB_forecast_application\data\vintage_data`. 
+The vintage data is then loaded to Matlab and the estimation command in the mod-file is added to the bottom of the Dynare mod-file according to the hyperparameters specified above.
 
-The estimation command is then built next. The estimation block will be built in the following standardized format
->estimation(nodisplay, smoother, order=1, prefilter=0, mode_check, bayesian_irf, datafile=(`data file name`), xls_sheet=(`scenario`), xls_range=B1:(`p.ExcelColumnUntil`)101, presample=4, mh_replic=(`p.chainLen`), mh_nblocks=1, mh_drop=0.3, mh_tune_jscale=0.3, sub_draws=1000, forecast=40, mode_compute=6) gdp_rgd_obs gdpdef_obs;
+A typical estimation command looks like the following:
+>```estimation(nodisplay, smoother, order=1, prefilter=0, mode_check, bayesian_irf, datafile=data_20210209, xls_sheet=s1, xls_range=B1:AY100, presample=4, mh_replic=1000000, mh_nblocks=1, mh_jscale=0.3, mh_drop=0.3, sub_draws=5000, forecast=40, mode_compute=4) gdp_rgd_obs gdpdef_obs;```
 
-!!!Important
-    As seen from the code, it is important to match the key observables with the following names:
+!!!Note
+    As seen from the code, it is essential to match the key observables with the following names:
 
     - GDP growth as `gdp_rgd_obs`, and 
-    - inflation as `gdpdef_obs`.
+    - Inflation as `gdpdef_obs`.
 
 The algorithm will then append the above estimation block to the main mod file of the model that stored under `...\MMB_forecast_application\models`, and copy the appended mod file to the folder `...\MMB_forecast_application\estimations\QPM08_20210101_s1_fffff` that was created at the begining of the triple loop. The algorithm then runs the mod file using Dynare.
 
