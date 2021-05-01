@@ -40,17 +40,19 @@ The usage of other hyperparameters are either self-explanatory or to be easily f
 
 ## DSGE model estimation
 
+### Model estimation
+
 The structure of this block consists of three nested loops:
 
 - A loop through `p.models`,
 - A loop through `p.vintages`, and
 - A loop through `p.scenarios`.
 
-In each loop, a sub-folder named `[modelname]_[vintagedate]_[scenario]_(suffix)` will be created to store the estimation and forecasts. For example, if we estimate the `QPM08` model using the vintage data at `20080807` in scenario `1` without any suffix, then a folder `QPM08_20210101_s1` will be created under the path `./estimations`.
+In each loop, a sub-folder named `[modelname]_[vintagedate]_[scenario]_(suffix)` will be created to store the estimation and forecasts under the path `./estimations`. For example, if we estimate the `QPM08` model using the vintage data at `20080807` in scenario `1` without any suffix, then a folder `QPM08_20210101_s1` will be created.
 
-If this folder already exists, then we can choose either to delete existing files and start a complete new estimation, or keep existing files. For example, if a mode file is already in the folder, then we can skip the maximum likelihood estimation and start the MH replications right away.
+If this folder already exists, then we can choose either to delete existing files and start a complete new estimation, or keep existing files. For example, if the mode file is already in the folder, then we can keep this file to skip the maximum likelihood (ML) estimation and start the MH algorithm right away.
 
-The vintage data is then loaded to Matlab and the estimation command in the mod-file is added to the bottom of the Dynare mod-file according to the hyperparameters specified above.
+The vintage data and Dynare mod-file are copied to the newly created folder. Then, the estimation command is added to the bottom of the Dynare mod-file, in which we use the values of the hyperparameters given in the `settings` block.
 
 A typical estimation command looks like the following:
 >```estimation(nodisplay, smoother, order=1, prefilter=0, mode_check, bayesian_irf, datafile=data_20210209, xls_sheet=s1, xls_range=B1:AY100, presample=4, mh_replic=1000000, mh_nblocks=1, mh_jscale=0.3, mh_drop=0.3, sub_draws=5000, forecast=40, mode_compute=4) gdp_rgd_obs gdpdef_obs;```
@@ -61,15 +63,37 @@ A typical estimation command looks like the following:
     - GDP growth as `gdp_rgd_obs`, and 
     - Inflation as `gdpdef_obs`.
 
-The algorithm will then append the above estimation block to the main mod file of the model that stored under `...\MMB_forecast_application\models`, and copy the appended mod file to the folder `...\MMB_forecast_application\estimations\QPM08_20210101_s1_fffff` that was created at the begining of the triple loop. The algorithm then runs the mod file using Dynare.
+With the estimation command specified above, Dynare will try to obtain the ML estimate based on the fourth mode computation routine (`mode_compute=4`). If this attempt fails, the program will automatically try out the next routine contained in `p.mode_compute_order`.
 
-### Results Adjustment and Organization
+### Storage of forecast
 
-Note that the MCMC draws will be deleted by the algorithm due to their enormous size. Note that some forecast results has to be adjusted depending on the model of interest (the adjustment is made under the block ` % save GDP forecasts (start from the last in-sample obs)` in the MATLAB script). 
+All the results are stored in the struct `oo_` after the estimation, and the program collects the nowcast and forecasts of real GDP growth (and inflation) from `oo_`.
+
+The forecasts are stored in `t.output.forecast.gdp` for real GDP growth (and `t.output.forecast.inflation` for inflation). The first element of this array is the actual data dated one period before the current quarter. The second element is the nowcast, which are saved in different places in `oo_`:
+
+- In Scenario one, it is calculated by Dynare and can be retreived as the first observation of the forecasted series
+- In Scenario two and four, it is provided by the Survey of Professional Forecasters and can be retreived as the last observation of the smoothed series.
+- In Scneario three, it is calculated dy Dynare and can be retreived as the last observation of the smoothed series.
+
+!!!Note
+	MH draws will be deleted after the estimation due to their enormous size.
+
+Note that some forecasts have to be adjusted depending on the model of interest. 
 
 !!!Example
-    For models that uses demeanded inflation as observable, the inflation forecast generated will also be demeaned. As a result, the MATLAB script has to be modified such that mean of the inflation has to be added back to the inflation forecast of the model. One potential way to do so is to compare the first observation (actual data) of the inflation with another model that uses non-demeaned inflation, and add the difference back to the whole forecasting series.
+	We take the first difference of the forecasts from the estimated QPM08 and IN10 models, because GDP are expressed in levels in these two models.
 
+!!!Example
+    For models in which the data are demeaned, we need to add the mean of the forecasted variables back. The IN10 model is one example. We need to run the program `IN10_adjustment_generation.m` after the estimation to add the mean of real GDP growth back.
 
+    <!-- demeanded inflation as observable, the inflation forecast generated will also be demeaned. As a result, the MATLAB script has to be modified such that mean of the inflation has to be added back to the inflation forecast of the model. One potential way to do so is to compare the first observation (actual data) of the inflation with another model that uses non-demeaned inflation, and add the difference back to the whole forecasting series. -->
 
-Results will then be stored in a `.json` file in the folder. The `.json` file contains the series of forecasting values, model name, scenario, vintage date, and other informations (that are of less important).
+Finally, all the results are stored in a JSON file. It contains the forecasted series, model name, vintage date, scenario, and other less important information.
+
+---
+
+## BVAR model estimation
+
+The program also estimates the Bayesian VAR models if at least one of the three GLP models are included in `p.models`.
+
+The procedure is similar to the estimation of DSGE models: A new folder is created, and then data is copied to this folder. Also, after the estimation, all the results are stored in a JSON file. The only difference is that it now calls the program written by the Giannone, Lenza and Primiceri (2010) to draw samples from the posterior distribution and generate forecasts.
