@@ -21,11 +21,11 @@ Create an Excel file named `data_comparison_QPM08.xlsx` to compare the data prov
 
 The only exception is for those macroeconomic series expressed in per-capita terms (such as the real GDP growth per person). For these series, we don't divide the aggregate value by the total number of population, even if the authors did so in their paper. This is because that our objective is to forecast the aggregated real GDP growth, and we do not aim at forecasting the per-capita GDP growth and population growth separately.
 
-The graph below shows the real GDP growth calculated by the authors in blue (per capita, revised) and calculated by us in orange (aggregated, non-revised).
+<!-- The graph below shows the real GDP growth calculated by the authors in blue (per capita, revised) and calculated by us in orange (aggregated, non-revised).
 
 <figure>
   <img src="../img/CMR14GDPgrowth.PNG" width="500" />
-</figure>
+</figure> -->
 
 If the new model requires some new raw variables and/or new observed variables, please add them accordingly following the instructions in [Data Processing](data.md).
 
@@ -42,7 +42,7 @@ If the new model requires some new raw variables and/or new observed variables, 
 We start from the original mod-file (and steady-state file) provided by the authors. To begin with, change the names of the observed variables in the mod-file (and steady-state file) to match the names of the variables in vintage data files.
 
 !!!note
-	Sometimes the original model does not contain the real GDP growth. Check whether it would be possible to construct a new variable (doesn't have to be the observable, but must be named `gdp_rgd_obs`) to represent the real GDP growth. For example, the graph above shows that the real GDP growth is defined in gross terms in the CMR14 model. Then we can simply define `gdp_rgd_obs = ln(original_gdp_growth)*100`. If this is not possible (for example, some models use demeaned GDP level), then try to adjust the forecast after the estimation.
+	Sometimes the original model does not contain the real GDP growth. Check whether it would be possible to construct a new variable (doesn't have to be the observable, but must be named `gdp_rgd_obs`) to represent the real GDP growth. For example, the real GDP growth is defined in gross terms in the CMR14 model. Then we can simply define `gdp_rgd_obs = ln(original_gdp_growth)*100`. If this is not possible (for example, some models use demeaned GDP level), then try to adjust the forecast after the estimation.
 
 Then comment out any `estimation` or `stoch_simul` block in the mod-file. We do so because a standardized estimation block will be added to the mod-file when we use `gen_forecast_old.m` to estimate models.	
 
