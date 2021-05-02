@@ -29,7 +29,7 @@ The path `./data/vintage_data` contains observed vintage data for model estimati
 
 ## Generate vintage data
 
-The main program for generating observed vintage data is `./scripts/gen_vintage_data.py`. It first collects relevant raw data that are needed for constructing the specified observed variables, and then calculates observed variables acccording to the definitions in the block `construct_observables`.
+The main program for generating observed vintage data is `./scripts/gen_vintage_data.py`. It first collects relevant raw data that are needed for constructing the specified observed variables, and then calculates observed variables according to the definitions in the block `construct_observables`.
 
 As an example, by executing the following command, Python will generate a new Excel file in `./data` that contains three observed variables: `gdp_rgd_obs`, `ffr_obs` and `gdpdef_obs`. The sample period is from 1990:I to 2008:III, and the data was observed in Aug 7th, 2008.
 
@@ -49,7 +49,7 @@ We need only fill in the years (and months) when the SPFs are done, as Python se
 	Newly generated vintage data files will appear in `./data`. Please move these files to `./data/vintage_data` (and replace the old files when necessary) if you find no mistakes in them.
 
 !!!Important
-    If more observed variables are included in the vintage data file, please adjust the hyperparameter `p.ExcelColumnUntil` in the Matlab program accordingly. More information can be found in [Forecast generation](forecast.md))
+    If more observed variables are included in the vintage data file, please adjust the hyper-parameter `p.ExcelColumnUntil` in the Matlab program accordingly. More information can be found in [Forecast generation](forecast.md))
 
 ---
 
@@ -61,7 +61,7 @@ We need only fill in the years (and months) when the SPFs are done, as Python se
     Ideally, `variables` would contain the IDs of all the data series. However, due to some unknown issues regarding ALFRED's API, one can only download series that have same frequency each time.  A convenient way to do so is to type in IDs of the series that share the same frequency for each row, and uncomment one row each time to download data. 
 
 !!!Note
-	When raw data are being downloaded, their basic information are also being automatically written to `./data/raw_variable_description.csv`. Raw data has to be documented in this file before they can be retrived by the Python scripts.
+	When raw data are being downloaded, their basic information are also being automatically written to `./data/raw_variable_description.csv`. Raw data has to be documented in this file before they can be retrieved by the Python scripts.
 
 `./scripts/raw_rtdsm_gb_spf.py` is a Python program for scraping raw data from the RTDSM, Greenbook, and SPF. Data from these sources will be downloaded to the paths `./data/raw/rtdsm`, `./data/raw/greenbook`, and `./data/raw/spf`, respectively.
 
@@ -79,7 +79,7 @@ One has to manually update all the data series in `./data/raw/others`. More deta
 
 	- If the historical values of this variable are not revised over time (e.g., asset prices from the financial market), then we just need to record its values in one column. Check `C0091Y.xlsx` as an example.
 
-	- If the historical values of this variable are revised (e.g., most macroeconomic series) and it is possible to collect its historical values in each revision, then it is recommended to record its values in a upper-triangluar matrix. Check `MORTRATE.xlsx` as an example.
+	- If the historical values of this variable are revised (e.g., most macroeconomic series) and it is possible to collect its historical values in each revision, then it is recommended to record its values in a upper-triangular matrix. Check `MORTRATE.xlsx` as an example.
 
 !!!Note
 	For raw variables that are not from ALFRED, one needs to manually document their basic information in `raw_variable_description.csv`.
@@ -93,7 +93,7 @@ To begin with, a new observed variables has to be manually registered in a new r
 - column D (construction): IDs of the raw data that are required for constructing this new observable
 
 !!!Note
-    For column D, one can simply list the IDs of all the required raw variables and seperate them with a minus `-` sign.
+    For column D, one can simply list the IDs of all the required raw variables and separate them with a minus `-` sign.
 
 After the registration, one needs to write down the formula for constructing the new observed variable in the block `construct_observables` of the program `./scripts/get_vintage_data.py`.
 
@@ -116,6 +116,10 @@ elif obs == 'Y':
 ---
 
 ## Further information
+
+### Determine the type of DSGE model
+
+Information contained in the Excel file `./data/ModelClass.xlsx` determines a DSGE model belongs to the pre-crisis or post-crisis type. This is useful when we run `collect_results.py` to calculate the mean forecasts of pre- and post-crisis models afterwards.
 
 ### Actual data to be compared with
 

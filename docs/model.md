@@ -1,32 +1,52 @@
-# Model Implementation
+# Model implementation
 
-In this model implementation section, the model `QPM08` is used as an example. Implemetation of another moel is done by simply replacing `QPM08` with the desired name of the model.
+In this section we use the `QPM08` as an example to demonstrate the standardized procedure for implementing a new model.
 
-## General Steps
-Model is implemented in the following strucuture
+---
 
-1. Replicate the data and understand the algorithm in constructing the observables. Store the original replication package in `reference` folder
-2. Observations has to be constructed in the Python script `...\MMB_forecast_application\scripts\get_vintage_data.py`
-3. The mod file is stored in the folder `...\MMB_forecast_application/models/QPM08`
-4. the estimation block of the mod file has to be commented out, as the main matlab script will add the comment block automatically
-5. Data of the specific vintage date will be retrived from the folder `...\MMB_forecast_application\data\vintage_data`
+## General steps
+
+1. Replicate the observed data to understand how each observed variable is constructed from raw data. Store the original  files and data comparison results in `./reference/QPM08` folder.
+2. Add new raw variables and observed variables according the guidance in [Data Processing](data.md) if necessary.
+3. Modify the Dynare mod-file (and steady-state file), including changing the names of the observed variables and removing the estimation block. Copy the modified mod-file (and steady-state file) to `./models/QPM08`.
+4. Before running estimations, make sure that the observed variables of the new model are included in the vintage data files. For more information please refer to [Data Processing](data.md).
+
+---
 
 ## Pre-implementation
-First observable data of the model has to be replicated. To download required raw data, please check section `Process data`. Once we are able to replicate the data provided by the author, we could implement the data in the Python script `...\MMB_forecast_application\scripts\get_vintage_data.py`. Please see section `Process data`.
 
-## Mod File Implementation
+Create a folder named `QPM08` in `./reference` to store data descriptions, original data files and original mod files of the model.
 
-We start from the original mod file provided by the author. If there is a steady-state file provided by the author, also include it in the model folder. For the mod file, We take special care of the block `varobs`, as it contains the observational variables that we have constructed in vintage data. For the mod file, names of the variables appeared in `varobs` has to be modified to match the names of variables generated in vintage data. 
+Create an Excel file named `data_comparison_QPM08.xlsx` to compare the data provided by the authors with the data we construct. Minimize the discrepancy between the two as much as possible.
 
-!!!Note 
-    One could use the function `Find and Replace All` of any editors.
+The only exception is for those macroeconomic series expressed in per-capita terms (such as the real GDP growth per person). For these series, we don't divide the aggregate value by the total number of population, even if the authors did so in their paper. This is because that our objective is to forecast the aggregated real GDP growth, and we do not aim at forecasting the per-capita GDP growth and population growth separately.
 
-We then comment out any `estimation` or `stoch_simul` block in the mod file. We do so becasue the unified estimation block will be added to the mod file by the MATLAB sciprt `gen_forecast.m`. Both the mod file and its steady-state file (if available) is to be stored in `...\MMB_forecast_application/models/QPM08`.
+The graph below shows the real GDP growth calculated by the authors in blue (per capita, revised) and calculated by us in orange (aggregated, non-revised).
 
+<figure>
+  <img src="../img/CMR14GDPgrowth.PNG" width="500" />
+</figure>
 
-## Reference
-The original replication package, pdf and the appendix of the paper is to be stored under the folder `...\MMB_forecast_application\reference\QPM08`. 
+If the new model requires some new raw variables and/or new observed variables, please add them accordingly following the instructions in [Data Processing](data.md).
 
-## Estimation and Generating Forecast
-Please see section `Generate forecast`
+!!!note
+	Before adding new variables, please always check `raw_variable_description.csv` (for raw variables) and `observed_variable_description.xlsx` (for observed variables) first, to ensure that 
+
+!!!important
+	It is essential to collect and use raw variables that are updated in high frequency whenever possible. For example, there are two federal funds rate series in the ALFRED: `FEDFUNDS` updated in a monthly frequency, and `DFF` updated in a daily frequency. Please only download and use the latter one when constructing observed variables, even if the authors used the former one in their paper.
+
+---
+
+## Mod-file implementation
+
+We start from the original mod-file (and steady-state file) provided by the authors. To begin with, change the names of the observed variables in the mod-file (and steady-state file) to match the names of the variables in vintage data files.
+
+!!!note
+	Sometimes the original model does not contain the real GDP growth. Check whether it would be possible to construct a new variable (doesn't have to be the observable, but must be named `gdp_rgd_obs`) to represent the real GDP growth. For example, the graph above shows that the real GDP growth is defined in gross terms in the CMR14 model. Then we can simply define `gdp_rgd_obs = ln(original_gdp_growth)*100`. If this is not possible (for example, some models use demeaned GDP level), then try to adjust the forecast after the estimation.
+
+Then comment out any `estimation` or `stoch_simul` block in the mod-file. We do so because a standardized estimation block will be added to the mod-file when we use `gen_forecast_old.m` to estimate models.	
+
+Test whether the modified mod-file, in combination with vintage data files, can be correctly interpreted by Dynare for model estimation and forecast generation. If so, save the modified mod-file, steady-state file, and any relevant files (such as some functions for computing the steady state) to `./models/QPM08`.
+
+The section [Forecast generation](forecast.md) introduces how to use implemented models to generate forecasts in multiple quarters and scenarios.
 

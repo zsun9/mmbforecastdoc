@@ -15,7 +15,7 @@ This program contains three blocks
 ---
 
 ## Settings
-All changes of the hyperparameters should be made within the section `settings`. The important parameters that needs to be checked everytime are as follows
+All changes of the hyper-parameters should be made within the section `settings`. The important parameters that needs to be checked every time are as follows
 
 - `p.vintages`: A string array containing the vintage dates of the model to be estimated; Date format: `yyyy-mm-dd`.
 - `p.scenarios`: A string array containing the scenarios to be estimated.
@@ -34,7 +34,7 @@ All changes of the hyperparameters should be made within the section `settings`.
 !!!Note
     In `gen_forecast.m`, `p.mode_compute_order = 6;`. This is because an option `mh_tune_jscale` is included in the mod-file, which instructs Dynare to automatically tune the scale parameter of the covariance matrix, so that the acceptance ratio will be close to the desired level. However, this option is only compatible with `mode_compute=6`.
 
-The usage of other hyperparameters are either self-explanatory or to be easily found in the Dynare manual.
+The usage of other hyper-parameters are either self-explanatory or to be easily found in the Dynare manual.
 
 ---
 
@@ -52,7 +52,7 @@ In each loop, a sub-folder named `[modelname]_[vintagedate]_[scenario]_(suffix)`
 
 If this folder already exists, then we can choose either to delete existing files and start a complete new estimation, or keep existing files. For example, if the mode file is already in the folder, then we can keep this file to skip the maximum likelihood (ML) estimation and start the MH algorithm right away.
 
-The vintage data and Dynare mod-file are copied to the newly created folder. Then, the estimation command is added to the bottom of the Dynare mod-file, in which we use the values of the hyperparameters given in the `settings` block.
+The vintage data and Dynare mod-file are copied to the newly created folder. Then, the estimation command is added to the bottom of the Dynare mod-file, in which we use the values of the hyper-parameters given in the `settings` block.
 
 A typical estimation command looks like the following:
 >estimation(nodisplay, smoother, order=1, prefilter=0, mode_check, bayesian_irf, datafile=data_20210209, xls_sheet=s1, xls_range=B1:AY100, presample=4, mh_replic=1000000, mh_nblocks=1, mh_jscale=0.3, mh_drop=0.3, sub_draws=5000, forecast=40, mode_compute=4) gdp_rgd_obs gdpdef_obs;
@@ -71,9 +71,9 @@ All the results are stored in the struct `oo_` after the estimation, and the pro
 
 The forecasts are stored in `t.output.forecast.gdp` for real GDP growth (and `t.output.forecast.inflation` for inflation). The first element of this array is the actual data dated one period before the current quarter. The second element is the nowcast, which are saved in different places in `oo_`:
 
-- In Scenario one, it is calculated by Dynare and can be retreived as the first observation of the forecasted series
-- In Scenario two and four, it is provided by the Survey of Professional Forecasters and can be retreived as the last observation of the smoothed series.
-- In Scneario three, it is calculated dy Dynare and can be retreived as the last observation of the smoothed series.
+- In Scenario one, it is calculated by Dynare and can be retrieved as the first observation of the forecasted series
+- In Scenario two and four, it is provided by the Survey of Professional Forecasters and can be retrieved as the last observation of the smoothed series.
+- In Scneario three, it is calculated dy Dynare and can be retrieved as the last observation of the smoothed series.
 
 !!!Note
 	MH draws will be deleted after the estimation due to their enormous size.
@@ -86,7 +86,7 @@ Note that some forecasts have to be adjusted depending on the model of interest.
 !!!Example
     For models in which the data are demeaned, we need to add the mean of the forecasted variables back. The IN10 model is one example. We need to run the program `IN10_adjustment_generation.m` after the estimation to add the mean of real GDP growth back.
 
-    <!-- demeanded inflation as observable, the inflation forecast generated will also be demeaned. As a result, the MATLAB script has to be modified such that mean of the inflation has to be added back to the inflation forecast of the model. One potential way to do so is to compare the first observation (actual data) of the inflation with another model that uses non-demeaned inflation, and add the difference back to the whole forecasting series. -->
+    <!-- demeaned inflation as observable, the inflation forecast generated will also be demeaned. As a result, the MATLAB script has to be modified such that mean of the inflation has to be added back to the inflation forecast of the model. One potential way to do so is to compare the first observation (actual data) of the inflation with another model that uses non-demeaned inflation, and add the difference back to the whole forecasting series. -->
 
 Finally, all the results are stored in a JSON file. It contains the forecasted series, model name, vintage date, scenario, and other less important information.
 

@@ -9,6 +9,9 @@ This documentation aims at explaining the programs that are written and used by 
 
 The programs are stored in a private GitHub repository [here](https://github.com/zexisun/MMB_forecast_application).
 
+!!! info
+    This version of the documentation is prepared by KaiLong Liu and Zexi Sun. Last updated: May 3rd, 2021.
+
 The remainder of the page introduces the theoretical background of the project.
 
 ---
@@ -16,10 +19,10 @@ The remainder of the page introduces the theoretical background of the project.
 ## Core concepts
 
 `DSGE model`
-:   Quantitative economic model used to explain economic growth and business cycles. It contains structural equations that are built on microfoundations and on agents' inter-temporal optimization behaviors.
+:   Quantitative economic model used to explain economic growth and business cycles. It contains structural equations that are built on micro-foundations and on agents' inter-temporal optimization behaviors.
 
 `Bayesian VAR model`
-:   Vector autoregression (VAR) model estimated with Bayesian techniques. The parameters are treated as random variables that have prior distributions. Researchers usually use informative priors to reduce parameter uncertainty. At the moment, we only consider Bayesian VAR models, in which informative priors are optimally chosen according to Giannone, Lenza, and Primiceri (2010, GLP hereafter).
+:   Vector auto-regression (VAR) model estimated with Bayesian techniques. The parameters are treated as random variables that have prior distributions. Researchers usually use informative priors to reduce parameter uncertainty. At the moment, we only consider Bayesian VAR models, in which informative priors are optimally chosen according to Giannone, Lenza, and Primiceri (2010, GLP hereafter).
 
 `Pre-crisis models`
 :   Macroeconomic models developed before the 2008-09 financial crisis. These include small-scale NK models, medium-scale NK models, and Cowles Commission type model. The medium-scale model in this group feature nominal and real frictions that are commonly seen in DSGE models, but they don't include any financial frictions.
@@ -78,7 +81,7 @@ GDP forecasts are calculated based on the estimation results of the following mo
 
 ### Data scenarios
 
-The models are estimated in the following four scenarios, which are different in how the current-quarter data are inclunded in the sample. 
+The models are estimated in the following four scenarios, which are different in how the current-quarter data are included in the sample. 
 
 - In the first scenario, current-quarter data are not available.
 - In the second scenario, the nowcast from the Survey of Professional Forecasters (SPF) are available.
@@ -93,9 +96,9 @@ To analyze the forecasting performance of the models during economic recessions,
 - `2008:III-2009:II` for the Great Recession of 2008-2009
 - `2020:I-2020:IV` for the COVID-19 recession of 2020
 
-We adopt a rolling window strategy to ﬁx the number of quarters in each sample to 100.
+We adopt a rolling window strategy to fix the number of quarters in each sample to 100.
 
-To make sure that the the information set used for estimation are perfectly aligned with the information available to professional forecasters who take the SPF, we retreive the data available at **the submission deadline for the SPF** in each quarter. It influences the current-quarter data that are inclunded in the third scenario most.
+To make sure that the the information set used for estimation are perfectly aligned with the information available to professional forecasters who take the SPF, we retrieve the data available at **the submission deadline for the SPF** in each quarter. It influences the current-quarter data that are included in the third scenario most.
 
 !!! example
     The SPF's submission deadline for 2008:III was August 7th, 2008. Thus, the real time data constructed for this quarter contains all the information released up till Aug 7th. It contains the real GDP growth in 2008:II, as it is published on July 31st. This observation is available in all the scenarios. It contains the effective federal funds rate in 2008:III, as it is updated on a daily frequency. We use its mean from Jul 1st - Aug 7th as its value in 2008:III. Note however that this observation is only available in the third and fourth scenarios.
@@ -108,16 +111,3 @@ To make sure that the the information set used for estimation are perfectly alig
 
 !!! note
     It usually takes less than 10 hours for one estimation to be done on a computer with i7 8th generation (or higher) CPU. The only exception is the CMR14 model, which takes much longer time to estimate than any other models. Therefore, we only draw 100,000 samples for this model.
-
----
-
-## Important readings
-
-Del Negro, M., Schorfheide, F., 2013. DSGE model-based forecasting. Handbook of Economic Forecasting, 2A: 57-140. [Link](https://www.sciencedirect.com/science/article/pii/B9780444536839000025)
-
-Wieland, V., Wolters, M., 2011. The diversity of forecasts from macroeconomic models of the US economy. Economic Theory, 47(2-3): 247-292. [Link](https://link.springer.com/article/10.1007/s00199-010-0549-7)
-
-Wieland, V., Wolters, M., 2013. Forecasting and policy making. Handbook of Economic Forecasting, 2A: 239-325. [Link](https://www.sciencedirect.com/science/article/pii/B9780444536839000050)
-
-Wolters M, 2015. Evaluating point and density forecasts of DSGE models. Journal of Applied Econometrics, 30(1): 74-96. [Link](https://onlinelibrary.wiley.com/doi/abs/10.1002/jae.2363)
-

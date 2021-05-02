@@ -10,7 +10,7 @@ Programs for estimating models and generating forecasts are written in `Matlab (
 
 ## Python and R
 
-Most programs for collecting and transforming data are wrriten in `Python 3.7.0`, a few are also written in `R 4.0.2`.
+Most programs for collecting and transforming data are written in `Python 3.7.0`, a few are also written in `R 4.0.2`.
 
 The following Python libraries are used
 

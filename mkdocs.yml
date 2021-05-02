@@ -4,13 +4,14 @@ theme:
   name: material
 
 nav:
-  - Home: index.md
-  - Software environments: system.md
-  - Project layout: layout.md
-  - Process data: data.md
-  - Generate forecast: forecast.md
-  - Add model: model.md
-  - Present results: application.md
+  - Home: index.md # done
+  - Software environments: system.md # done
+  - Project layout: layout.md # done
+  - Process data: data.md # done
+  - Generate forecast: forecast.md # done
+  - Add model: model.md # done
+  - Present results: application.md # done
+  - Important readings: reference.md # done
 
 markdown_extensions:
   - def_list
@@ -21,6 +22,7 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.superfences
   - pymdownx.snippets
+  - attr_list
 
 extra_javascript:
   - javascripts/config.js
