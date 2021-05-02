@@ -2,12 +2,14 @@
 
 This documentation aims at explaining the programs that are written and used by the team of the MMB forecasting project to 
 
-- collect and transform data,
-- estimate models and generate forecasts,
-- implement new DSGE models, and
-- present results in the online application.
+- [collect and transform data](data.md),
+- [estimate models and generate forecasts](forecast.md),
+- [implement new DSGE models](model.md), and
+- [present results in the online application](application.md).
 
 The programs are stored in a private GitHub repository [here](https://github.com/zexisun/MMB_forecast_application).
+
+Before running the programs, please make sure that you have installed relevant [softwares](system.md) and have a basic understanding of the [structure of the repository](layout.md).
 
 !!! info
     This version of the documentation is prepared by KaiLong Liu and Zexi Sun. Last updated: May 3rd, 2021.
