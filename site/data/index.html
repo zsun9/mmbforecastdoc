@@ -1,0 +1,771 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+    
+    
+      
+        <title>Process data - MMB Forecasting Project Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e35208c4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-processing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="MMB Forecasting Project Documentation" class="md-header__button md-logo" aria-label="MMB Forecasting Project Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MMB Forecasting Project Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Process data
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="MMB Forecasting Project Documentation" class="md-nav__button md-logo" aria-label="MMB Forecasting Project Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    MMB Forecasting Project Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system/" class="md-nav__link">
+        Software environments
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../layout/" class="md-nav__link">
+        Project layout
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Process data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Process data
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-storage" class="md-nav__link">
+    Data storage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-vintage-data" class="md-nav__link">
+    Generate vintage data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-raw-data" class="md-nav__link">
+    Update raw data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-new-data" class="md-nav__link">
+    Add new data
+  </a>
+  
+    <nav class="md-nav" aria-label="Add new data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-new-raw-variable" class="md-nav__link">
+    Add new raw variable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-new-observed-variable" class="md-nav__link">
+    Add new observed variable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-information" class="md-nav__link">
+    Further information
+  </a>
+  
+    <nav class="md-nav" aria-label="Further information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#determine-the-type-of-dsge-model" class="md-nav__link">
+    Determine the type of DSGE model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actual-data-to-be-compared-with" class="md-nav__link">
+    Actual data to be compared with
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forecasts-to-be-compared-with" class="md-nav__link">
+    Forecasts to be compared with
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filling-missing-values" class="md-nav__link">
+    Filling missing values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filling-nowcast" class="md-nav__link">
+    Filling nowcast
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../forecast/" class="md-nav__link">
+        Generate forecast
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model/" class="md-nav__link">
+        Add model
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../application/" class="md-nav__link">
+        Present results
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        Important readings
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-storage" class="md-nav__link">
+    Data storage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-vintage-data" class="md-nav__link">
+    Generate vintage data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-raw-data" class="md-nav__link">
+    Update raw data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-new-data" class="md-nav__link">
+    Add new data
+  </a>
+  
+    <nav class="md-nav" aria-label="Add new data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-new-raw-variable" class="md-nav__link">
+    Add new raw variable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-new-observed-variable" class="md-nav__link">
+    Add new observed variable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-information" class="md-nav__link">
+    Further information
+  </a>
+  
+    <nav class="md-nav" aria-label="Further information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#determine-the-type-of-dsge-model" class="md-nav__link">
+    Determine the type of DSGE model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actual-data-to-be-compared-with" class="md-nav__link">
+    Actual data to be compared with
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forecasts-to-be-compared-with" class="md-nav__link">
+    Forecasts to be compared with
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filling-missing-values" class="md-nav__link">
+    Filling missing values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filling-nowcast" class="md-nav__link">
+    Filling nowcast
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="data-processing">Data processing</h1>
+<p>Both raw data and observed data are stored in the <code>data</code> folder. Most raw data can be automatically downloaded from web and transformed into observed data that are used for model estimation.</p>
+<p>The remainder of the page introduces <a href="#data-storage">where to store data</a>, <a href="#generate-vintage-data">how to generate observed vintage data from raw data</a>, <a href="#update-raw-data">how to update raw data</a>, <a href="#add-new-data">how to add new data</a>, and <a href="#further-information">some further information</a>.</p>
+<hr />
+<h2 id="data-storage">Data storage</h2>
+<p>The path <code>./data/raw</code> contains raw data that were directly downloaded from the source without being processed. There are five data sources:</p>
+<ul>
+<li>
+<p><code>alfred</code>: raw data from the <a href="https://alfred.stlouisfed.org">Archival FRED</a>, which contains vintage versions of economic data from various original sources, including the Bureau of Economic Analysis, the Bureau of Labor Statistics, and the Federal Reserve Board.</p>
+</li>
+<li>
+<p><code>greenbook</code>: forecasts from <a href="https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/greenbook">the Federal Reserve Board's Greenbook</a> (with a five-year lag)</p>
+</li>
+<li>
+<p><code>spf</code>: forecasts from <a href="https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/survey-of-professional-forecasters">the Survey of Professional Forcasters (SPF)</a></p>
+</li>
+<li>
+<p><code>rtdsm</code>: raw data from the Philadelphia Fed's <a href="https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists">Real Time Data Set for Macroeconomists</a></p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We use raw data from the ALFRED to construct observed data. We compare the model-based forecasts with the forecasts from the SPF or Greenbook. Raw data from the RTDSM are usually not used.</p>
+</div>
+<ul>
+<li><code>others</code>: raw data collected from other sources.</li>
+</ul>
+<p>The path <code>./data/vintage_data</code> contains observed vintage data for model estimation. Each Excel spreadsheet contains observed data that are collected in a specific vintage date for four scenarios.</p>
+<hr />
+<h2 id="generate-vintage-data">Generate vintage data</h2>
+<p>The main program for generating observed vintage data is <code>./scripts/gen_vintage_data.py</code>. It first collects relevant raw data that are needed for constructing the specified observed variables, and then calculates observed variables according to the definitions in the block <code>construct_observables</code>.</p>
+<p>As an example, by executing the following command, Python will generate a new Excel file in <code>./data</code> that contains three observed variables: <code>gdp_rgd_obs</code>, <code>ffr_obs</code> and <code>gdpdef_obs</code>. The sample period is from 1990:I to 2008:III, and the data was observed in Aug 7th, 2008.</p>
+<blockquote>
+<p>gen_vintage_data(vintageDate='2008-08-07', quarterStart='1990Q1', quarterEnd='2008Q3', raw=[], observed=['gdp_rgd_obs', 'ffr_obs', 'gdpdef_obs'])</p>
+</blockquote>
+<p>The program <code>./scripts/get_vintage_data_at_SPF_deadline.py</code> repeatedly calls <code>gen_vintage_data.py</code> to generate a bunch of Excel files. Each Excel file contains data observed at a specific SPF submission deadline. The required inputs are</p>
+<ul>
+<li>A list of the IDs of the observed variables, and </li>
+<li>The years (and months) when the corresponding SPFs are made</li>
+</ul>
+<p>We need only fill in the years (and months) when the SPFs are done, as Python searches for the exact SPF submission dates in <code>./data/spf_dates.csv</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please remember to include new SPF deadlines in <code>spf_dates.csv</code> based on the updated information on <a href="https://www.philadelphiafed.org/-/media/frbp/assets/surveys-and-data/survey-of-professional-forecasters/spf-release-dates.txt">this page</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Newly generated vintage data files will appear in <code>./data</code>. Please move these files to <code>./data/vintage_data</code> (and replace the old files when necessary) if you find no mistakes in them.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If more observed variables are included in the vintage data file, please adjust the hyper-parameter <code>p.ExcelColumnUntil</code> in the Matlab program accordingly. More information can be found in <a href="../forecast/">Forecast generation</a>)</p>
+</div>
+<hr />
+<h2 id="update-raw-data">Update raw data</h2>
+<p><code>./scripts/raw_alfred.ipynb</code> is a Python Jupyter notebook for collecting raw data from the ALFRED. To update raw data, simply uncomment (or add) the ID of the required series in the first array <code>variables</code>, and amend the <code>end_date</code> to the desire date. Raw data will then be downloaded to the path <code>./data/raw/alfred</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ideally, <code>variables</code> would contain the IDs of all the data series. However, due to some unknown issues regarding ALFRED's API, one can only download series that have same frequency each time.  A convenient way to do so is to type in IDs of the series that share the same frequency for each row, and uncomment one row each time to download data. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When raw data are being downloaded, their basic information are also being automatically written to <code>./data/raw_variable_description.csv</code>. Raw data has to be documented in this file before they can be retrieved by the Python scripts.</p>
+</div>
+<p><code>./scripts/raw_rtdsm_gb_spf.py</code> is a Python program for scraping raw data from the RTDSM, Greenbook, and SPF. Data from these sources will be downloaded to the paths <code>./data/raw/rtdsm</code>, <code>./data/raw/greenbook</code>, and <code>./data/raw/spf</code>, respectively.</p>
+<p>One has to manually update all the data series in <code>./data/raw/others</code>. More details can be found in <code>./data/raw_others_collection.txt</code>.</p>
+<hr />
+<h2 id="add-new-data">Add new data</h2>
+<h3 id="add-new-raw-variable">Add new raw variable</h3>
+<ul>
+<li>
+<p>If the new raw variable is from the ALFRED, then one can simply include its ID in the first array of the Notebook <code>./scripts/raw_alfred.ipynb</code>.</p>
+</li>
+<li>
+<p>If the new raw variable is from elsewhere, one needs to manually collect and store its values in an Excel spreadsheet in <code>./data/others</code>. The name of the spreadsheet should be identical to the ID of this variable.</p>
+<ul>
+<li>
+<p>If the historical values of this variable are not revised over time (e.g., asset prices from the financial market), then we just need to record its values in one column. Check <code>C0091Y.xlsx</code> as an example.</p>
+</li>
+<li>
+<p>If the historical values of this variable are revised (e.g., most macroeconomic series) and it is possible to collect its historical values in each revision, then it is recommended to record its values in a upper-triangular matrix. Check <code>MORTRATE.xlsx</code> as an example.</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For raw variables that are not from ALFRED, one needs to manually document their basic information in <code>raw_variable_description.csv</code>.</p>
+</div>
+<h3 id="add-new-observed-variable">Add new observed variable</h3>
+<p>To begin with, a new observed variables has to be manually registered in a new row in the Excel file <code>./data/observed_variable_description</code>. Two columns has to be filled before it can be constructed by the Python program:</p>
+<ul>
+<li>Column A (id): name of the new observed variable, which should be different from the existing names already listed in this file</li>
+<li>column D (construction): IDs of the raw data that are required for constructing this new observable</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For column D, one can simply list the IDs of all the required raw variables and separate them with a minus <code>-</code> sign.</p>
+</div>
+<p>After the registration, one needs to write down the formula for constructing the new observed variable in the block <code>construct_observables</code> of the program <code>./scripts/get_vintage_data.py</code>.</p>
+<p>The basic syntax is as follows</p>
+<div class="highlight"><pre><span></span><code><span class="k">elif</span> <span class="n">obs</span> <span class="o">==</span> <span class="p">[</span><span class="n">ID_of_observable</span><span class="p">]:</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">obs</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">construction</span> <span class="n">formula</span><span class="p">]</span>
+</code></pre></div>
+<p>Use the syntax <code>df[d[ID_of_raw_variable]]</code> to incoporate raw variables in the formula.</p>
+<p>For example, the following scripts create a new observable <code>Y</code>, which is defined as the log difference of the raw variable <code>X</code> in percentage terms</p>
+<div class="highlight"><pre><span></span><code><span class="k">elif</span> <span class="n">obs</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">obs</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]]</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">shift</span><span class="p">())</span><span class="o">*</span><span class="mi">100</span>
+</code></pre></div>
+<hr />
+<h2 id="further-information">Further information</h2>
+<h3 id="determine-the-type-of-dsge-model">Determine the type of DSGE model</h3>
+<p>Information contained in the Excel file <code>./data/ModelClass.xlsx</code> determines a DSGE model belongs to the pre-crisis or post-crisis type. This is useful when we run <code>collect_results.py</code> to calculate the mean forecasts of pre- and post-crisis models afterwards.</p>
+<h3 id="actual-data-to-be-compared-with">Actual data to be compared with</h3>
+<p>We compare the forecasts of the real GDP growth with its actual values in the second release. These actual values are saved in <code>./data/actualGDP.csv</code>. Please remember to update this file if new data become available.</p>
+<h3 id="forecasts-to-be-compared-with">Forecasts to be compared with</h3>
+<p>We compared the model-based forecasts with forecasts from other sources, which are saved <code>./data/gb_spf_fair.xlsx</code>. It contains the forecasts of the real GDP growth from</p>
+<ul>
+<li>Greenbook (wtih a five-year lag)</li>
+<li>SPF (including both individual forecasts and mean forecasts), and</li>
+<li>Fair's Cowles Commission type model</li>
+</ul>
+<p>Please remember to update this file if new forecasts become available.</p>
+<h3 id="filling-missing-values">Filling missing values</h3>
+<p>We choose to use raw data from the ALFRED rather than RTDSM to construct observed data, because the former database usually contains richer information about data revisions in history. However, sometimes there are some missing values in the data files downloaded from ALFRED, and then we need to use the same series observed on the same vintage date from the RTDSM to fill these values.</p>
+<p>When generating vintage data, Python leverages the information in the Excel file <code>./data/fill_history.xlsx</code> to check if it is possible to fill some missing values.</p>
+<ul>
+<li>Column A: ID of the raw series from the ALFRED</li>
+<li>Column B: The source (folder) where the filling data is to be found</li>
+<li>Column C: ID of the raw series in RTDSM for filling missing values</li>
+<li>Column D: File name of the series in Column C</li>
+</ul>
+<h3 id="filling-nowcast">Filling nowcast</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Proceed with caution. It is advisable to consult senior members of the team before filling the nowcast of some new variables.</p>
+</div>
+<p>In Scenarios 2 and 4 we append the mean of the SPF nowcast as additional observations in the last sample period. The Excel file <code>./data/fill_nowcast.xlsx</code> instructs Python how to append the data.</p>
+<ul>
+<li>Column A: D of the raw series from the ALFRED</li>
+<li>Column B: The source where the filling data is to be found (usually SPF)</li>
+<li>Column C: ID of the raw series for filling nowcast</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../layout/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Project layout
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../forecast/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Generate forecast
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
