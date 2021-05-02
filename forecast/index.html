@@ -1,0 +1,611 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+    
+    
+      
+        <title>Generate forecast - MMB Forecasting Project Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e35208c4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#forecast-generation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="MMB Forecasting Project Documentation" class="md-header__button md-logo" aria-label="MMB Forecasting Project Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MMB Forecasting Project Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Generate forecast
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="MMB Forecasting Project Documentation" class="md-nav__button md-logo" aria-label="MMB Forecasting Project Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    MMB Forecasting Project Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system/" class="md-nav__link">
+        Software environments
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../layout/" class="md-nav__link">
+        Project layout
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/" class="md-nav__link">
+        Process data
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Generate forecast
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Generate forecast
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    Settings
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dsge-model-estimation" class="md-nav__link">
+    DSGE model estimation
+  </a>
+  
+    <nav class="md-nav" aria-label="DSGE model estimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-estimation" class="md-nav__link">
+    Model estimation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-of-forecast" class="md-nav__link">
+    Storage of forecast
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bvar-model-estimation" class="md-nav__link">
+    BVAR model estimation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model/" class="md-nav__link">
+        Add model
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../application/" class="md-nav__link">
+        Present results
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        Important readings
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    Settings
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dsge-model-estimation" class="md-nav__link">
+    DSGE model estimation
+  </a>
+  
+    <nav class="md-nav" aria-label="DSGE model estimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-estimation" class="md-nav__link">
+    Model estimation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-of-forecast" class="md-nav__link">
+    Storage of forecast
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bvar-model-estimation" class="md-nav__link">
+    BVAR model estimation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="forecast-generation">Forecast generation</h1>
+<p>Model estimation and forecast generation are done through the Matlab m-file <code>gen_forecast_old.m</code>. Before executing this program, please make sure that</p>
+<ul>
+<li>
+<p>The observed data of the model are already generated according to the descriptions in <a href="../data/">Data processing</a></p>
+</li>
+<li>
+<p>The Dynare mod-file of the model is already included in the folder <code>Models</code> according to the instructions in <a href="../model/">Model implementation</a></p>
+</li>
+</ul>
+<p>This program contains three blocks</p>
+<ul>
+<li>Settings</li>
+<li>DSGE model estimation</li>
+<li>Bayesian VAR model estimation</li>
+</ul>
+<hr />
+<h2 id="settings">Settings</h2>
+<p>All changes of the hyper-parameters should be made within the section <code>settings</code>. The important parameters that needs to be checked every time are as follows</p>
+<ul>
+<li><code>p.vintages</code>: A string array containing the vintage dates of the model to be estimated; Date format: <code>yyyy-mm-dd</code>.</li>
+<li><code>p.scenarios</code>: A string array containing the scenarios to be estimated.</li>
+<li><code>p.models</code>:  A string array containing the names of the models to be estimated.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The names of the DSGE models should be the same as the names of the sub-folder in <code>Models</code>. The names of the BVAR models can only take three values: "GLP3v", "GLP5v", and "GLP8v".</p>
+</div>
+<ul>
+<li><code>p.executor</code>: The name of the person who runs the program.</li>
+<li><code>p.ExcelColumnUntil</code>: The last column of the vintage data file. It instructs Dynare which cell range it reads from the Excel spreadsheet.</li>
+<li><code>p.suffix</code>: The suffix of the names of folders that will be created in <code>./estimations</code>. It is usually used for experimental purposes if needed. A blank string is otherwise used.</li>
+<li><code>p.chainLen</code>: Number of replications for the Metropolis Hastings (MH) algorithm in the estimation of DSGE models. It is set to 1,000,000 for most models, except for those with extremely high computational cost (e.g., CMR14), which is then set to 100,000.</li>
+<li><code>p.scalingParam</code>: Scale parameter for the covariance matrix of the the proposal distribution in the MH algorithm. Ideally, the value of this parameter is chosen to ensure that the final acceptance rate of the MH algorithm is between 20% and 40%.</li>
+<li><code>p.mode_compute_order</code>: An array containing a sequence of numbers representing the corresponding <code>mode_compute</code> algorithms in Dynare. The program loops through all the mode computation routines, until the mode is found.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In <code>gen_forecast.m</code>, <code>p.mode_compute_order = 6;</code>. This is because an option <code>mh_tune_jscale</code> is included in the mod-file, which instructs Dynare to automatically tune the scale parameter of the covariance matrix, so that the acceptance ratio will be close to the desired level. However, this option is only compatible with <code>mode_compute=6</code>.</p>
+</div>
+<p>The usage of other hyper-parameters are either self-explanatory or to be easily found in the Dynare manual.</p>
+<hr />
+<h2 id="dsge-model-estimation">DSGE model estimation</h2>
+<h3 id="model-estimation">Model estimation</h3>
+<p>The structure of this block consists of three nested loops:</p>
+<ul>
+<li>A loop through <code>p.models</code>,</li>
+<li>A loop through <code>p.vintages</code>, and</li>
+<li>A loop through <code>p.scenarios</code>.</li>
+</ul>
+<p>In each loop, a sub-folder named <code>[modelname]_[vintagedate]_[scenario]_(suffix)</code> will be created to store the estimation and forecasts under the path <code>./estimations</code>. For example, if we estimate the <code>QPM08</code> model using the vintage data at <code>20080807</code> in scenario <code>1</code> without any suffix, then a folder <code>QPM08_20210101_s1</code> will be created.</p>
+<p>If this folder already exists, then we can choose either to delete existing files and start a complete new estimation, or keep existing files. For example, if the mode file is already in the folder, then we can keep this file to skip the maximum likelihood (ML) estimation and start the MH algorithm right away.</p>
+<p>The vintage data and Dynare mod-file are copied to the newly created folder. Then, the estimation command is added to the bottom of the Dynare mod-file, in which we use the values of the hyper-parameters given in the <code>settings</code> block.</p>
+<p>A typical estimation command looks like the following:</p>
+<blockquote>
+<p>estimation(nodisplay, smoother, order=1, prefilter=0, mode_check, bayesian_irf, datafile=data_20210209, xls_sheet=s1, xls_range=B1:AY100, presample=4, mh_replic=1000000, mh_nblocks=1, mh_jscale=0.3, mh_drop=0.3, sub_draws=5000, forecast=40, mode_compute=4) gdp_rgd_obs gdpdef_obs;</p>
+</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As seen from the code, it is essential to match the key observables with the following names:</p>
+<ul>
+<li>GDP growth as <code>gdp_rgd_obs</code>, and </li>
+<li>Inflation as <code>gdpdef_obs</code>.</li>
+</ul>
+</div>
+<p>With the estimation command specified above, Dynare will try to obtain the ML estimate based on the fourth mode computation routine (<code>mode_compute=4</code>). If this attempt fails, the program will automatically try out the next routine contained in <code>p.mode_compute_order</code>.</p>
+<h3 id="storage-of-forecast">Storage of forecast</h3>
+<p>All the results are stored in the struct <code>oo_</code> after the estimation, and the program collects the nowcast and forecasts of real GDP growth (and inflation) from <code>oo_</code>.</p>
+<p>The forecasts are stored in <code>t.output.forecast.gdp</code> for real GDP growth (and <code>t.output.forecast.inflation</code> for inflation). The first element of this array is the actual data dated one period before the current quarter. The second element is the nowcast, which are saved in different places in <code>oo_</code>:</p>
+<ul>
+<li>In Scenario one, it is calculated by Dynare and can be retrieved as the first observation of the forecasted series</li>
+<li>In Scenario two and four, it is provided by the Survey of Professional Forecasters and can be retrieved as the last observation of the smoothed series.</li>
+<li>In Scneario three, it is calculated dy Dynare and can be retrieved as the last observation of the smoothed series.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MH draws will be deleted after the estimation due to their enormous size.</p>
+</div>
+<p>Note that some forecasts have to be adjusted depending on the model of interest. </p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>We take the first difference of the forecasts from the estimated QPM08 and IN10 models, because GDP are expressed in levels in these two models.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>For models in which the data are demeaned, we need to add the mean of the forecasted variables back. The IN10 model is one example. We need to run the program <code>IN10_adjustment_generation.m</code> after the estimation to add the mean of real GDP growth back.</p>
+<!-- demeaned inflation as observable, the inflation forecast generated will also be demeaned. As a result, the MATLAB script has to be modified such that mean of the inflation has to be added back to the inflation forecast of the model. One potential way to do so is to compare the first observation (actual data) of the inflation with another model that uses non-demeaned inflation, and add the difference back to the whole forecasting series. -->
+</div>
+<p>Finally, all the results are stored in a JSON file. It contains the forecasted series, model name, vintage date, scenario, and other less important information.</p>
+<hr />
+<h2 id="bvar-model-estimation">BVAR model estimation</h2>
+<p>The program also estimates the Bayesian VAR models if at least one of the three GLP models are included in <code>p.models</code>.</p>
+<p>The procedure is similar to the estimation of DSGE models: A new folder is created, and then data is copied to this folder. Also, after the estimation, all the results are stored in a JSON file. The only difference is that it now calls the program written by the Giannone, Lenza and Primiceri (2010) to draw samples from the posterior distribution and generate forecasts.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../data/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Process data
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../model/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Add model
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

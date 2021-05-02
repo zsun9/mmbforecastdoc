@@ -1,0 +1,637 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+    
+    
+      
+        <title>MMB Forecasting Project Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.e35208c4.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#home" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="MMB Forecasting Project Documentation" class="md-header__button md-logo" aria-label="MMB Forecasting Project Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MMB Forecasting Project Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="MMB Forecasting Project Documentation" class="md-nav__button md-logo" aria-label="MMB Forecasting Project Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    MMB Forecasting Project Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Home
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts" class="md-nav__link">
+    Core concepts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forecasting-methodology" class="md-nav__link">
+    Forecasting methodology
+  </a>
+  
+    <nav class="md-nav" aria-label="Forecasting methodology">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-objective" class="md-nav__link">
+    The objective
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    Models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-scenarios" class="md-nav__link">
+    Data scenarios
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-vintages" class="md-nav__link">
+    Data vintages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-algorithm" class="md-nav__link">
+    The algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="system/" class="md-nav__link">
+        Software environments
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="layout/" class="md-nav__link">
+        Project layout
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data/" class="md-nav__link">
+        Process data
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="forecast/" class="md-nav__link">
+        Generate forecast
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="model/" class="md-nav__link">
+        Add model
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="application/" class="md-nav__link">
+        Present results
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/" class="md-nav__link">
+        Important readings
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts" class="md-nav__link">
+    Core concepts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forecasting-methodology" class="md-nav__link">
+    Forecasting methodology
+  </a>
+  
+    <nav class="md-nav" aria-label="Forecasting methodology">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-objective" class="md-nav__link">
+    The objective
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    Models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-scenarios" class="md-nav__link">
+    Data scenarios
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-vintages" class="md-nav__link">
+    Data vintages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-algorithm" class="md-nav__link">
+    The algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="home">Home</h1>
+<p>This documentation aims at explaining the programs that are written and used by the team of the MMB forecasting project to </p>
+<ul>
+<li><a href="data/">collect and transform data</a>,</li>
+<li><a href="forecast/">estimate models and generate forecasts</a>,</li>
+<li><a href="model/">implement new DSGE models</a>, and</li>
+<li><a href="application/">present results in the online application</a>.</li>
+</ul>
+<p>The programs are stored in a private GitHub repository <a href="https://github.com/zexisun/MMB_forecast_application">here</a>.</p>
+<p>Before running the programs, please make sure that you have installed relevant <a href="system/">softwares</a> and have a basic understanding of the <a href="layout/">structure of the repository</a>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This version of the documentation is prepared by KaiLong Liu and Zexi Sun. Last updated: May 3rd, 2021.</p>
+</div>
+<p>The remainder of the page introduces the theoretical background of the project.</p>
+<hr />
+<h2 id="core-concepts">Core concepts</h2>
+<dl>
+<dt><code>DSGE model</code></dt>
+<dd>Quantitative economic model used to explain economic growth and business cycles. It contains structural equations that are built on micro-foundations and on agents' inter-temporal optimization behaviors.</dd>
+<dt><code>Bayesian VAR model</code></dt>
+<dd>Vector auto-regression (VAR) model estimated with Bayesian techniques. The parameters are treated as random variables that have prior distributions. Researchers usually use informative priors to reduce parameter uncertainty. At the moment, we only consider Bayesian VAR models, in which informative priors are optimally chosen according to Giannone, Lenza, and Primiceri (2010, GLP hereafter).</dd>
+<dt><code>Pre-crisis models</code></dt>
+<dd>Macroeconomic models developed before the 2008-09 financial crisis. These include small-scale NK models, medium-scale NK models, and Cowles Commission type model. The medium-scale model in this group feature nominal and real frictions that are commonly seen in DSGE models, but they don't include any financial frictions.</dd>
+<dt><code>Post-crisis models</code></dt>
+<dd>Macroeconomic models developed after the 2008-09 financial crisis. These models contain real frictions as a result of financing problems faced by firms and households, such as the financial accelerator à la Bernanke, Gertler and Gilchrist (1999), or the collateral constraint à la Kiyotaki and Moore (1997).</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above categorization is actually determined by whether a financial friction is included in the model, rather than by whether the model is published before or after the financial crisis. For example, the Gali, Smets, and Wouters (2012) model is categorized as a pre-crisis model, while the three-equation NK model with a financial accelerator is categorized as a post-crisis model.</p>
+</div>
+<dl>
+<dt><code>Vintage data</code></dt>
+<dd>A sample of data collected historically. The word <strong>vintage</strong> is used to highlight the fact that, as many macroeconomic series are revised over time, a specific data point (for example, the real GDP growth in 2008:III) can have different values when it is observed in different points in time. We use real-time data vintages for model estimation, meaning that the data we use are the same as the data that forecasters faced in real time.</dd>
+<dt><code>Bayesian estimation</code></dt>
+<dd>The method for estimating the parameters <span class="arithmatex">\(\theta\)</span> of the DSGE and VAR models. Given data <span class="arithmatex">\(D\)</span>, it combines the prior densities of the parameters <span class="arithmatex">\(p(\theta)\)</span> with the likelihood <span class="arithmatex">\(p(D|\theta)\)</span> to obtain the posterior densities <span class="arithmatex">\(p(\theta|D) \propto p(\theta) p(D|\theta)\)</span>, up to a normalizing constant. We employ the Metropolis-Hasting (MH) algorithm to draw samples from the posterior densities to calculate the forecast.</dd>
+<dt><code>SPF forecast and Greenbook forecast</code></dt>
+<dd>External sources that we compare the model-based forecasts with. One is the Survey of Professional Forecasters (SPF), which is a quarterly survey of macroeconomic forecasts conducted by the Federal Reserve Bank of Philadelphia. Another is the Greenbook, which is produced by the Federal Reserve Board of Governors before each meeting of the Federal Open Market Committee. The second is available to the public with a five-year lag.</dd>
+</dl>
+<hr />
+<h2 id="forecasting-methodology">Forecasting methodology</h2>
+<h3 id="the-objective">The objective</h3>
+<p>Obtain the nowcast and one- to-four-step-ahead forecasts of the U.S. real GDP growth rate</p>
+<h3 id="models">Models</h3>
+<p>GDP forecasts are calculated based on the estimation results of the following models</p>
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Pre-crisis DSGE models</label><div class="tabbed-content">
+<ul>
+<li><code>DS04</code>: Del Negro and Schorfheide (2004)</li>
+<li><code>WW11</code>: Wieland and Wolters (2011)</li>
+<li><code>SW07</code>: Smets and Wouters (2007)</li>
+<li><code>FU20</code>: Fratto and Uhlig (2020)</li>
+<li><code>FRBEDO08</code>: Edgee et al. (2008)</li>
+<li><code>GSW12</code>: Gali, Smets, and Wouters (2012)</li>
+</ul>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Post-crisis DSGE models</label><div class="tabbed-content">
+<ul>
+<li><code>NKBGG</code>: Bernanke, Gertler, and Gilchrist (1999)</li>
+<li><code>IN10</code>: Iacoviello and Neri (2010)</li>
+<li><code>CMR14</code>: Christiano, Motto, and Rostagno (2014)</li>
+<li><code>DNGS15</code>: Del Negro, Giannoni, and Schorfheide (2015)</li>
+<li><code>KR15_FF</code>: Kolasa and Rubaszek (2015)</li>
+<li><code>KR15_HH</code>: Kolasa and Rubaszek (2015)</li>
+<li><code>QPM08</code>: Carabenciov et al. (2008)</li>
+</ul>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Bayesian VAR models</label><div class="tabbed-content">
+<ul>
+<li><code>GLP3v</code>: Bayesian VAR with GLP priors, same observables as DS04</li>
+<li><code>GLP5v</code>: Bayesian VAR with GLP priors, same observables as NKBGG</li>
+<li><code>GLP8v</code>: Bayesian VAR with GLP priors, same observables as DNGS15</li>
+</ul>
+</div>
+</div>
+<h3 id="data-scenarios">Data scenarios</h3>
+<p>The models are estimated in the following four scenarios, which are different in how the current-quarter data are included in the sample. </p>
+<ul>
+<li>In the first scenario, current-quarter data are not available.</li>
+<li>In the second scenario, the nowcast from the Survey of Professional Forecasters (SPF) are available.</li>
+<li>In the third scenario, current-quarter data are available for some observables, provided that they are updated on a monthly or higher frequency</li>
+<li>In the fourth scenario, current-quarter data from both the second and third scenarios are available.</li>
+</ul>
+<h3 id="data-vintages">Data vintages</h3>
+<p>To analyze the forecasting performance of the models during economic recessions, we estimate models using data constructed in the following quarters</p>
+<ul>
+<li><code>2001:I-2001:IV</code> for the 2001 recession</li>
+<li><code>2008:III-2009:II</code> for the Great Recession of 2008-2009</li>
+<li><code>2020:I-2020:IV</code> for the COVID-19 recession of 2020</li>
+</ul>
+<p>We adopt a rolling window strategy to fix the number of quarters in each sample to 100.</p>
+<p>To make sure that the the information set used for estimation are perfectly aligned with the information available to professional forecasters who take the SPF, we retrieve the data available at <strong>the submission deadline for the SPF</strong> in each quarter. It influences the current-quarter data that are included in the third scenario most.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>The SPF's submission deadline for 2008:III was August 7th, 2008. Thus, the real time data constructed for this quarter contains all the information released up till Aug 7th. It contains the real GDP growth in 2008:II, as it is published on July 31st. This observation is available in all the scenarios. It contains the effective federal funds rate in 2008:III, as it is updated on a daily frequency. We use its mean from Jul 1st - Aug 7th as its value in 2008:III. Note however that this observation is only available in the third and fourth scenarios.</p>
+</div>
+<h3 id="the-algorithm">The algorithm</h3>
+<ul>
+<li>Obtain the maximum likelihood (ML) estimate of the parameters</li>
+<li>Run the MH algorithm with 1,000,000 replications. Set the mean of the first proposal distribution to the ML estimate. Set the scale factor to ensure the acceptance rate is between 20% and 40%. Drop the first 30% of the draws.</li>
+<li>Draw 5,000 samples from the above 1,000,000 replications to calculate forecasts</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It usually takes less than 10 hours for one estimation to be done on a computer with i7 8th generation (or higher) CPU. The only exception is the CMR14 model, which takes much longer time to estimate than any other models. Therefore, we only draw 100,000 samples for this model.</p>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+      
+        <a href="system/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Software environments
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+        <script src="javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
